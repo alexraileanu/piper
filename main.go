@@ -1,7 +1,7 @@
 package main
 
 import (
-    "fmt"
+    "log"
     "os"
     "path/filepath"
     "time"
@@ -19,18 +19,19 @@ func main() {
     a := aws.Initialize()
 
     scheduler.Every(1).Minute().Do(func() {
-        fmt.Printf("attempting to snap pic\n")
+        println("attempting to snap pic")
         err := c.Snap()
         if err != nil {
-            fmt.Printf("error snapping: %v\n", err)
+            log.Fatalf("error snapping: %v\n", err)
             return
         }
         a.Post(c.F, os.Getenv("BUCKET_NAME"), filepath.Base(c.F))
         err = c.Clean()
         if err != nil {
-            fmt.Printf("error cleaning file: %v\n", err)
+            log.Fatalf("error cleaning file: %v\n", err)
             return
         }
+        println("finished snapping and sending pic :)")
     })
 
     <-scheduler.StartAsync()

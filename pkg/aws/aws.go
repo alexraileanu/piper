@@ -2,7 +2,7 @@ package aws
 
 import (
     "bytes"
-    "fmt"
+    "log"
     "os"
 
     "github.com/aws/aws-sdk-go/aws"
@@ -36,7 +36,7 @@ func Initialize() *AWS {
 func (a *AWS) Post(filePath string, bucket string, key string) {
     file, err := os.Open(filePath)
     if err != nil {
-        fmt.Printf("error opening file: %v\n", err)
+        log.Fatalf("error opening file: %v\n", err)
         return
     }
 
@@ -46,7 +46,7 @@ func (a *AWS) Post(filePath string, bucket string, key string) {
 
     _, err = file.Read(buffer)
     if err != nil {
-        fmt.Printf("error reading file contents: %v\n", err)
+        log.Fatalf("error reading file contents: %v\n", err)
         return
     }
 
@@ -57,7 +57,7 @@ func (a *AWS) Post(filePath string, bucket string, key string) {
         Key:           aws.String(key),
     })
     if err != nil {
-        fmt.Printf("error posting to s3: %v\n", err)
+        log.Fatalf("error posting to s3: %v\n", err)
         return
     }
 }
