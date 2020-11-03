@@ -1,0 +1,16 @@
+[Unit]
+Description=Piper service
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+ExecStart=/home/pi/piper
+
+Restart=on-failure
+
+StandardOutput=append:/var/log/piper/out.log
+StandardError=append:/var/log/piper/err.log
+
+[Install]
+WantedBy=multi-user.target
