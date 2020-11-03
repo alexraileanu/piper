@@ -20,7 +20,17 @@ func (c *Cam) Snap() error {
     filePath := fmt.Sprintf("/tmp/%s", fileName)
     c.F = filePath
 
-    cmd := exec.Command("raspistill", "-o", filePath)
+    cmd := exec.Command(
+        "raspistill",
+        "-o",
+        filePath,
+        "-q",
+        "75",
+        "-w",
+        "1280",
+        "-h",
+        "720",
+    )
     err := cmd.Start()
     if err != nil {
         return err
