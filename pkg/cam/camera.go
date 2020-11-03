@@ -17,7 +17,7 @@ func Initialize() *Cam {
 
 func (c *Cam) Snap() error {
     fileName := fmt.Sprintf("%s.jpg", time.Now().Format("2006-01-02_15:04:05"))
-    filePath := fmt.Sprintf("/tmp/%s.jpg", fileName)
+    filePath := fmt.Sprintf("/tmp/%s", fileName)
     c.F = filePath
 
     cmd := exec.Command("raspistill", "-o", filePath)
