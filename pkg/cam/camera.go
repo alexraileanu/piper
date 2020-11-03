@@ -29,6 +29,6 @@ func (c *Cam) Snap() error {
     return cmd.Wait()
 }
 
-func (c *Cam) Clean() {
-    os.Remove(c.F)
+func (c *Cam) Clean() error {
+    return os.Remove(c.F)
 }
