@@ -16,7 +16,7 @@ func Initialize() *Cam {
 }
 
 func (c *Cam) Snap() error {
-    fileName := fmt.Sprintf("%s.jpg", time.Now().Format("20060102150405"))
+    fileName := fmt.Sprintf("%s.jpg", time.Now().Local().Format("2006-01-02_15:04:05"))
     filePath := fmt.Sprintf("/tmp/%s", fileName)
     c.F = filePath
 

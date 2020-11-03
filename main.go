@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-    scheduler := gocron.NewScheduler(time.UTC)
+    scheduler := gocron.NewScheduler(time.Local)
     c := cam.Initialize()
     a := aws.Initialize()
 
