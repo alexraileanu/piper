@@ -19,7 +19,7 @@ func main() {
     a := aws.Initialize()
 
     scheduler.Every(1).Minute().Do(func() {
-        println("attempting to snap pic")
+        log.Println("attempting to snap pic")
         err := c.Snap()
         if err != nil {
             log.Fatalf("error snapping: %v\n", err)
@@ -31,7 +31,7 @@ func main() {
             log.Fatalf("error cleaning file: %v\n", err)
             return
         }
-        println("finished snapping and sending pic :)")
+        log.Println("finished snapping and sending pic :)")
     })
 
     <-scheduler.StartAsync()
